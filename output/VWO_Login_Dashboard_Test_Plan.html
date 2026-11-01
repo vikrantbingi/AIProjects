@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Test Plan - VWO Login Dashboard (app.vwo.com)</title>
+<style>
+  :root {
+    --ink: #1b1f24;
+    --muted: #5b6570;
+    --line: #d8dee4;
+    --accent: #6b3fa0;
+    --accent-soft: #f4f0fa;
+    --bg: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: #eef1f4;
+    color: var(--ink);
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 1000px;
+    margin: 24px auto;
+    background: var(--bg);
+    padding: 48px 56px 64px;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  header.doc-head {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+
+  header.doc-head h1 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    letter-spacing: -0.2px;
+  }
+
+  header.doc-head .sub {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 28px;
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .meta-grid div span {
+    color: var(--muted);
+    display: inline-block;
+    min-width: 132px;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin: 34px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+    color: var(--accent);
+  }
+
+  h3 {
+    font-size: 15px;
+    margin: 22px 0 8px;
+  }
+
+  h4 {
+    font-size: 14px;
+    margin: 16px 0 6px;
+    color: var(--ink);
+  }
+
+  p { margin: 8px 0; }
+
+  ul, ol { margin: 8px 0 8px 22px; padding: 0; }
+  li { margin: 4px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px;
+    font-size: 13px;
+  }
+
+  th, td {
+    border: 1px solid var(--line);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--accent-soft);
+    font-weight: 600;
+  }
+
+  tbody tr:nth-child(even) td { background: #fafbfc; }
+
+  .toc {
+    background: #fafbfc;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 16px 22px;
+    margin-bottom: 8px;
+  }
+
+  .toc h2 {
+    margin-top: 0;
+    border: none;
+    font-size: 15px;
+    padding: 0;
+  }
+
+  .toc ol { margin-left: 20px; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  .note {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 10px 14px;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+
+  .signoff td { height: 46px; }
+
+  footer.doc-foot {
+    margin-top: 40px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  @media print {
+    body { background: #fff; font-size: 11.5px; }
+    .page { margin: 0; max-width: none; box-shadow: none; padding: 0 8mm; }
+    h2 { page-break-after: avoid; }
+    table, .note { page-break-inside: avoid; }
+    .toc { page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="doc-head">
+    <h1>Test Plan: VWO Login Dashboard</h1>
+    <div class="sub">Application under test: app.vwo.com/login &nbsp;|&nbsp; Document type: Master Test Plan</div>
+    <div class="meta-grid">
+      <div><span>Project</span> VWO Login Dashboard</div>
+      <div><span>Version</span> 1.0</div>
+      <div><span>Prepared by</span> QA Team</div>
+      <div><span>Date</span> 18 Oct 2026</div>
+      <div><span>Source document</span> PRD: VWO Login Dashboard</div>
+      <div><span>Status</span> Draft for approval</div>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#objective">Objective</a></li>
+      <li><a href="#scope">Scope</a></li>
+      <li><a href="#inclusions">Inclusions</a></li>
+      <li><a href="#environments">Test Environments</a></li>
+      <li><a href="#defects">Defect Reporting Procedure</a></li>
+      <li><a href="#strategy">Test Strategy</a></li>
+      <li><a href="#schedule">Test Schedule</a></li>
+      <li><a href="#deliverables">Test Deliverables</a></li>
+      <li><a href="#entry-exit">Entry and Exit Criteria</a></li>
+      <li><a href="#execution">Test Execution</a></li>
+      <li><a href="#closure">Test Closure</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#risks">Risks and Mitigations</a></li>
+      <li><a href="#approvals">Approvals</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="objective">1. Objective</h2>
+  <p>
+    The goal of this test plan is to ensure the quality, functionality, security, accessibility, and
+    reliability of the VWO Login Dashboard hosted at app.vwo.com. The login dashboard is the critical
+    entry point for users accessing VWO's experimentation, personalization, and analytics tools, and it
+    serves digital marketers, product managers, UX designers, developers, enterprise teams, conversion
+    rate optimization specialists, and data analysts.
+  </p>
+  <p>This test plan verifies that the login experience:</p>
+  <ul>
+    <li>Provides secure access to VWO's experimentation platform with enterprise-grade security standards.</li>
+    <li>Minimizes login friction to improve user adoption and retention.</li>
+    <li>Supports enterprise security requirements and compliance standards (GDPR, CCPA, OWASP authentication guidelines, WCAG 2.1 AA).</li>
+    <li>Facilitates seamless onboarding for new users discovering VWO's capabilities.</li>
+    <li>Meets the stated success metrics: 95%+ login success rate, sub-2-second page load, 90%+ user satisfaction, zero successful brute force attacks, and a 20% reduction in login-related support tickets.</li>
+  </ul>
+
+  <h2 id="scope">2. Scope</h2>
+  <p>Scope of the Test Plan for the VWO Login Dashboard:</p>
+  <ol>
+    <li>
+      <strong>Functional Testing:</strong>
+      <ul>
+        <li>Verify email and password based login with secure validation.</li>
+        <li>Test the Remember Me option for persistent login sessions.</li>
+        <li>Validate the account registration link and free trial signup path for new users.</li>
+        <li>Validate the transition to the main VWO dashboard after successful authentication.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>User Input Validation Testing:</strong>
+      <ul>
+        <li>Verify real-time field validation on blur with immediate feedback.</li>
+        <li>Validate email format verification and specialized mobile keyboards.</li>
+        <li>Validate password strength indicators and password requirement feedback.</li>
+        <li>Test boundary values for input fields to check for unexpected behavior.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Error Handling Testing:</strong>
+      <ul>
+        <li>Verify clear, actionable error messages for failed authentication attempts.</li>
+        <li>Check error responses for sensitive information disclosure.</li>
+        <li>Validate error identification, recovery options, and success confirmation in the error recovery flow.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Password Management Testing:</strong>
+      <ul>
+        <li>Verify the forgot password flow with secure token generation.</li>
+        <li>Test email-based password recovery and multiple recovery options.</li>
+        <li>Validate enforced password complexity requirements.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Session Management Testing:</strong>
+      <ul>
+        <li>Verify secure session handling with configurable timeout periods.</li>
+        <li>Validate secure session token generation and management.</li>
+        <li>Test session behavior with and without Remember Me enabled.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Multi-Factor and Enterprise Authentication Testing:</strong>
+      <ul>
+        <li>Verify optional 2FA support for enhanced security.</li>
+        <li>Validate enterprise SSO integration for organizational accounts.</li>
+        <li>Test SAML, OAuth, and other enterprise authentication protocols.</li>
+        <li>Test optional social login with Google, Microsoft, and other identity providers.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Security Testing:</strong>
+      <ul>
+        <li>Validate end-to-end encryption for all authentication data transmission.</li>
+        <li>Verify encrypted password storage using industry-standard hashing algorithms.</li>
+        <li>Verify HTTPS enforcement and SSL/TLS encryption for all login communications.</li>
+        <li>Validate rate limiting and request throttling protection against brute force attacks.</li>
+        <li>Conduct security assessments for vulnerabilities such as SQL injection and XSS.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Performance Testing:</strong>
+      <ul>
+        <li>Verify login page loading within 2 seconds on standard connections.</li>
+        <li>Validate compressed images and minified CSS/JavaScript assets.</li>
+        <li>Verify CDN utilization for global performance.</li>
+        <li>Assess response time under normal and peak loads to identify bottlenecks.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Scalability and Availability Testing:</strong>
+      <ul>
+        <li>Validate 99.9% uptime expectations for the global user base.</li>
+        <li>Test support for thousands of simultaneous login attempts.</li>
+        <li>Validate multi-region deployment for optimal global performance.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Usability and Interface Testing:</strong>
+      <ul>
+        <li>Verify responsive design and mobile-optimized touch-friendly controls.</li>
+        <li>Verify auto-focus on the first input field and clickable form labels.</li>
+        <li>Validate loading states and clear feedback during authentication processing.</li>
+        <li>Validate Light and Dark Mode theme support.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Accessibility Testing:</strong>
+      <ul>
+        <li>Verify screen reader support with ARIA labels.</li>
+        <li>Verify full keyboard navigation for all interactive elements.</li>
+        <li>Validate high contrast mode for visually impaired users.</li>
+        <li>Validate WCAG 2.1 AA compliance and inclusive design principles.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Branding and Visual Design Testing:</strong>
+      <ul>
+        <li>Verify brand consistency with VWO's design system and color scheme.</li>
+        <li>Validate professional, trustworthy visual appearance.</li>
+        <li>Verify the product announcement banner for the new UI launch.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Integration Testing:</strong>
+      <ul>
+        <li>Verify seamless transition to the VWO core platform after authentication.</li>
+        <li>Validate login success and failure tracking for analytics integration.</li>
+        <li>Validate integration with customer support systems for login assistance.</li>
+        <li>Validate marketing tool integration with onboarding and analytics platforms.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Compliance Testing:</strong>
+      <ul>
+        <li>Validate GDPR and CCPA compliance for user data handling.</li>
+        <li>Validate support for enterprise security policies and audit trails.</li>
+        <li>Verify adherence to OWASP authentication guidelines.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Compatibility Testing:</strong>
+      <ul>
+        <li>Test the login dashboard across supported browsers, operating systems, and devices.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Regression Testing:</strong>
+      <ul>
+        <li>Conduct regression testing after bug fixes or updates to ensure existing functionality remains intact.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Edge Case and Ad Hoc Testing:</strong>
+      <ul>
+        <li>Test extreme and boundary scenarios to identify potential issues.</li>
+        <li>Perform exploratory testing to identify hidden defects or usability issues.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Concurrency Testing:</strong>
+      <ul>
+        <li>Assess behavior when multiple users attempt to log in simultaneously.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Continuous Integration and Deployment (CI/CD) Testing:</strong>
+      <ul>
+        <li>Validate login dashboard behavior within the CI/CD pipeline to ensure smooth deployments.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Monitoring and Analytics Testing:</strong>
+      <ul>
+        <li>Validate real-time performance and security monitoring and alerting.</li>
+        <li>Validate login pattern analytics and personalization inputs.</li>
+      </ul>
+    </li>
+  </ol>
+  <p>
+    It is important to note that the scope of this test plan may evolve during the testing process based on
+    feedback, changing requirements, or discoveries during testing. The scope should be reviewed and adjusted
+    accordingly throughout the testing phase to ensure comprehensive coverage of the VWO Login Dashboard.
+  </p>
+
+  <h2 id="inclusions">3. Inclusions</h2>
+
+  <h3>Login Operations</h3>
+  <ul>
+    <li>Test successful login with valid registered email and password.</li>
+    <li>Verify appropriate error responses for invalid credentials, unregistered email, and empty mandatory fields.</li>
+    <li>Validate that a successful login establishes a secure session and redirects to the personalized VWO dashboard.</li>
+    <li>Verify the Remember Me checkbox creates a persistent login session and that unchecking it does not.</li>
+  </ul>
+
+  <h3>Registration and New User Path</h3>
+  <ul>
+    <li>Test the account registration link and free trial signup call-to-action with minimal friction.</li>
+    <li>Verify the guided onboarding introduction to VWO's capabilities post-registration.</li>
+    <li>Validate discovery entry points from VWO marketing materials and referrals.</li>
+  </ul>
+
+  <h3>Password Management</h3>
+  <ul>
+    <li>Test the forgot password flow end to end, including secure token generation.</li>
+    <li>Verify email-based password reset and alternate recovery options.</li>
+    <li>Validate password complexity enforcement and password strength indicators.</li>
+    <li>Verify reset tokens expire and cannot be reused.</li>
+  </ul>
+
+  <h3>Input Validation</h3>
+  <ul>
+    <li>Test validation on blur for email and password fields.</li>
+    <li>Verify email format validation and mobile keyboard type for the email field.</li>
+    <li>Test boundary values for minimum and maximum allowed input lengths.</li>
+    <li>Verify handling of invalid characters, invalid data types, and mandatory field omissions.</li>
+  </ul>
+
+  <h3>Session and Authentication Controls</h3>
+  <ul>
+    <li>Test session timeout behavior against the configured timeout period.</li>
+    <li>Verify secure session token generation and management.</li>
+    <li>Test optional 2FA enablement, verification, and recovery.</li>
+    <li>Test enterprise SSO login for organizational accounts, including SAML and OAuth.</li>
+    <li>Test optional social login with Google, Microsoft, and other identity providers.</li>
+  </ul>
+
+  <h3>Security Validation</h3>
+  <ul>
+    <li>Verify HTTPS enforcement and SSL/TLS encryption on all login communications.</li>
+    <li>Verify authentication data is encrypted end to end in transmission.</li>
+    <li>Verify passwords are stored using industry-standard hashing algorithms.</li>
+    <li>Test rate limiting and throttling against repeated failed login attempts.</li>
+    <li>Test for SQL injection, XSS, and sensitive information disclosure in error responses.</li>
+    <li>Verify no unauthorized session hijacking is possible.</li>
+  </ul>
+
+  <h3>User Experience and Accessibility</h3>
+  <ul>
+    <li>Verify auto-focus on the first input field and clickable labels.</li>
+    <li>Verify loading states during authentication processing.</li>
+    <li>Verify responsive layout and touch-friendly controls on mobile devices.</li>
+    <li>Verify screen reader support, ARIA labels, and full keyboard navigation.</li>
+    <li>Verify high contrast mode and Light and Dark Mode theme support.</li>
+    <li>Verify brand consistency and the new UI announcement banner.</li>
+  </ul>
+
+  <h3>Performance and Scalability</h3>
+  <ul>
+    <li>Measure login page load time against the sub-2-second target on standard connections.</li>
+    <li>Verify asset optimization through compressed images and minified CSS/JavaScript.</li>
+    <li>Verify CDN delivery and multi-region performance.</li>
+    <li>Evaluate behavior under high concurrent login loads to confirm stability.</li>
+  </ul>
+
+  <h3>Integration and Analytics</h3>
+  <ul>
+    <li>Verify seamless transition to the VWO core platform after successful authentication.</li>
+    <li>Verify login success and failure events are tracked for platform optimization.</li>
+    <li>Verify integration with customer support systems for login assistance.</li>
+    <li>Verify context preservation and recent activity from previous sessions.</li>
+  </ul>
+
+  <h3>Regression and Exploratory</h3>
+  <ul>
+    <li>Perform regression tests after bug fixes or updates to ensure existing login functionality remains intact.</li>
+    <li>Perform exploratory testing to surface hidden defects and usability issues.</li>
+  </ul>
+
+  <h2 id="environments">4. Test Environments</h2>
+  <p>The following operating systems, browsers, devices, and network conditions will be used for testing.</p>
+
+  <h3>Environment URLs</h3>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Environment URL</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>QA</td><td>https://app.vwo.com/login</td><td>Functional, UI, accessibility, and regression testing</td></tr>
+      <tr><td>Pre Prod</td><td>https://app.vwo.com/login</td><td>UAT, performance, security, and release validation</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Operating Systems and Browsers</h3>
+  <ul>
+    <li>Windows 10: Chrome, Firefox, and Edge</li>
+    <li>macOS: Safari Browser</li>
+    <li>Android Mobile OS: Chrome</li>
+    <li>iPhone Mobile OS: Safari</li>
+  </ul>
+
+  <h3>Devices and Screen Sizes</h3>
+  <ul>
+    <li>Desktop computers and laptops</li>
+    <li>Tablets</li>
+    <li>Smartphones with touch-friendly control validation</li>
+  </ul>
+
+  <h3>Network Connectivity</h3>
+  <ul>
+    <li>Wi-Fi, cellular, and wired connections</li>
+    <li>Standard connection profile for the sub-2-second page load target</li>
+    <li>Throttled and high-latency profiles for global and CDN performance validation</li>
+  </ul>
+
+  <h3>Hardware and Software Requirements</h3>
+  <ul>
+    <li>Sufficient processor, memory, and storage capacity to run the browser matrix and load generation tooling concurrently</li>
+    <li>Screen reader software and keyboard-only navigation setup for accessibility testing</li>
+    <li>Load testing tooling capable of simulating thousands of simultaneous login attempts</li>
+  </ul>
+
+  <h3>Security Protocols and Authentication</h3>
+  <ul>
+    <li>HTTPS with SSL/TLS for all test environment access</li>
+    <li>Test accounts for standard, 2FA-enabled, SSO, and social login scenarios</li>
+    <li>Tokens or certificates as required for enterprise SSO test tenants</li>
+  </ul>
+
+  <h3>Access Permissions and Roles</h3>
+  <ul>
+    <li>Testers: execute test cases, raise defects, and update status</li>
+    <li>Developers: triage and fix defects, provide builds</li>
+    <li>Stakeholders: review reports and provide approvals</li>
+  </ul>
+
+  <h2 id="defects">5. Defect Reporting Procedure</h2>
+  <ul>
+    <li>
+      <strong>Defect identification criteria:</strong> deviation from the requirements in the PRD, user
+      experience issues, accessibility non-compliance, security weaknesses, performance regressions, or
+      technical errors.
+    </li>
+    <li>
+      <strong>Reporting steps:</strong> use the designated defect template, provide detailed reproduction
+      steps, attach screenshots or logs, and record the environment, browser, and device used.
+    </li>
+    <li>
+      <strong>Triage and prioritization:</strong> assign severity and priority levels, then assign the defect
+      to the appropriate team member for investigation and resolution.
+    </li>
+    <li>
+      <strong>Tracking tools:</strong> defects are tracked and managed in JIRA.
+    </li>
+    <li>
+      <strong>Roles and responsibilities:</strong> testers raise and verify defects, developers fix them, and
+      the test lead owns triage, prioritization, and reporting.
+    </li>
+    <li>
+      <strong>Communication:</strong> a daily end-of-day status email is sent to development and management
+      listing the defects found that day.
+    </li>
+    <li>
+      <strong>Metrics:</strong> number of defects found, time taken to resolve, percentage of defects
+      successfully fixed, defect severity distribution, and defect leakage into later phases.
+    </li>
+  </ul>
+
+  <h3>Defect Process Points of Contact</h3>
+  <table>
+    <thead>
+      <tr><th>Area</th><th>Point of Contact</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>New Frontend</td><td>Devesh</td></tr>
+      <tr><td>Backend</td><td>Sonal</td></tr>
+      <tr><td>Dev Ops</td><td>Prajeeth</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="strategy">6. Test Strategy</h2>
+
+  <h3>Step 1: Test Design</h3>
+  <p>The first step is to create test scenarios and test cases for the various features in scope.</p>
+  <p>While developing test cases, we will use a number of test design techniques:</p>
+  <ul>
+    <li>Equivalence Class Partition</li>
+    <li>Boundary Value Analysis</li>
+    <li>Decision Table Testing</li>
+    <li>State Transition Testing</li>
+    <li>Use Case Testing</li>
+  </ul>
+  <p>We also use our expertise in creating test cases by applying the below:</p>
+  <ul>
+    <li>Error Guessing</li>
+    <li>Exploratory Testing</li>
+  </ul>
+  <p>We prioritize the test cases.</p>
+
+  <h3>Step 2: Testing Procedure When We Receive a Request for Testing</h3>
+  <ul>
+    <li>First, we conduct smoke testing to see if the various and important functionalities of the application are working.</li>
+    <li>We reject the build if the smoke testing fails and will wait for the stable build before performing in-depth testing of the application functionalities.</li>
+    <li>Once we receive a stable build which passes smoke testing, we perform in-depth testing using the test cases created.</li>
+    <li>Multiple test resources will be testing the same application on multiple supported environments simultaneously.</li>
+    <li>We then report the bugs in the bug tracking tool and send development and management the defects found on that day in a status end-of-day email.</li>
+  </ul>
+  <p>As part of the testing, we will perform the below types of testing:</p>
+  <ul>
+    <li>Smoke Testing and Sanity Testing</li>
+    <li>Regression Testing and Retesting</li>
+    <li>Usability Testing, Functionality and UI Testing</li>
+    <li>Security Testing, Accessibility Testing, and Performance Testing</li>
+  </ul>
+  <p>We repeat test cycles until we get the quality product.</p>
+
+  <h3>Step 3: Best Practices</h3>
+  <ul>
+    <li><strong>Context Driven Testing:</strong> we will be performing testing as per the context of the given application.</li>
+    <li><strong>Shift Left Testing:</strong> we will start testing from the beginning stages of the development itself, instead of waiting for the stable build.</li>
+    <li><strong>Exploratory Testing:</strong> using our expertise we will perform exploratory testing, apart from the normal execution of the test cases.</li>
+    <li><strong>End to End Flow Testing:</strong> we will test the end-to-end scenario which involves multiple functionalities to simulate the end user flows, including new user registration, returning user login, and error recovery.</li>
+  </ul>
+
+  <h2 id="schedule">7. Test Schedule</h2>
+  <p>Following is the test schedule planned for the project. Two sprints are planned to test the application.</p>
+  <table>
+    <thead>
+      <tr><th>Task</th><th>Dates</th><th>Duration</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Creating Test Plan</td><td>Sprint 1, Week 1</td><td>2 days</td></tr>
+      <tr><td>Test Case Creation</td><td>Sprint 1, Week 1 to Week 2</td><td>5 days</td></tr>
+      <tr><td>Test Case Execution</td><td>Sprint 1, Week 2 to Sprint 2, Week 2</td><td>2 sprints</td></tr>
+      <tr><td>Summary Reports Submission Date</td><td>Sprint 2, Week 2</td><td>2 days</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    Phase alignment: Phase 1 covers core authentication (secure login form, basic validation and error
+    handling, password reset). Phase 2 covers enhanced UX (mobile optimization, responsive design,
+    accessibility, advanced validation and feedback). Phase 3 covers enterprise features (SSO integration,
+    advanced security, analytics and monitoring).
+  </div>
+
+  <h2 id="deliverables">8. Test Deliverables</h2>
+  <table>
+    <thead>
+      <tr><th>Deliverable</th><th>Description</th><th>Owner</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Test Plan</td><td>This document, covering objective, scope, strategy, schedule, and risks</td><td>QA Team</td></tr>
+      <tr><td>Test Scenarios</td><td>High-level scenarios derived from the PRD requirements</td><td>QA Team</td></tr>
+      <tr><td>Test Cases</td><td>Detailed test cases with steps, test data, and expected results</td><td>QA Team</td></tr>
+      <tr><td>Requirement Traceability Matrix</td><td>Mapping of PRD requirements to test scenarios and test cases</td><td>QA Team</td></tr>
+      <tr><td>Test Execution Report</td><td>Pass, fail, and blocked status per test cycle</td><td>QA Team</td></tr>
+      <tr><td>Defect Report</td><td>Defects logged in JIRA with severity, priority, and status</td><td>QA Team</td></tr>
+      <tr><td>Test Summary Report</td><td>Consolidated results, metrics, and release recommendation</td><td>Test Lead</td></tr>
+      <tr><td>Accessibility and Performance Reports</td><td>WCAG 2.1 AA findings and load test results</td><td>QA Team</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="entry-exit">9. Entry and Exit Criteria</h2>
+  <p>The below are the entry and exit criteria for every phase of the Software Testing Life Cycle.</p>
+
+  <h3>Requirement Analysis</h3>
+  <p><strong>Entry Criteria:</strong></p>
+  <ul>
+    <li>Once the testing team receives the requirements documents or details about the project.</li>
+  </ul>
+  <p><strong>Exit Criteria:</strong></p>
+  <ul>
+    <li>List of requirements are explored and understood by the testing team.</li>
+    <li>Doubts are cleared.</li>
+  </ul>
+
+  <h2 id="execution">10. Test Execution</h2>
+  <p><strong>Entry Criteria:</strong></p>
+  <ul>
+    <li>Test scenarios and test cases documents are signed off by the client.</li>
+    <li>Application is ready for testing.</li>
+  </ul>
+  <p><strong>Exit Criteria:</strong></p>
+  <ul>
+    <li>Test case reports and defect reports are ready.</li>
+  </ul>
+
+  <h2 id="closure">11. Test Closure</h2>
+  <p><strong>Entry Criteria:</strong></p>
+  <ul>
+    <li>Test case reports and defect reports are ready.</li>
+  </ul>
+  <p><strong>Exit Criteria:</strong></p>
+  <ul>
+    <li>Test summary reports are published and approved.</li>
+  </ul>
+
+  <h2 id="tools">12. Tools</h2>
+  <p>The following are the list of tools we will be using in this project:</p>
+  <ul>
+    <li>JIRA Bug Tracking Tool</li>
+    <li>Mind map Tool</li>
+    <li>Snipping Screenshot Tool</li>
+    <li>Word and Excel documents</li>
+    <li>Browser developer tools for network, console, and responsive checks</li>
+    <li>Screen reader and accessibility audit tooling for WCAG 2.1 AA validation</li>
+    <li>Load and performance testing tooling for concurrent login simulation</li>
+  </ul>
+
+  <h2 id="risks">13. Risks and Mitigations</h2>
+  <p>The following are the list of risks possible and the ways to mitigate them:</p>
+  <table>
+    <thead>
+      <tr><th>Risk</th><th>Mitigation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Non-availability of a resource</td><td>Backup resource planning</td></tr>
+      <tr><td>Build URL is not working</td><td>Resources will work on other tasks</td></tr>
+      <tr><td>Less time for testing</td><td>Ramp up the resources based on the client needs dynamically</td></tr>
+      <tr><td>Security vulnerabilities such as brute force, SQL injection, or XSS</td><td>Regular security audits and penetration testing, real-time security monitoring and alert systems, and regular security patch deployment and vulnerability assessments</td></tr>
+      <tr><td>Performance degradation under peak login load</td><td>Comprehensive load testing under various load conditions, real-time performance monitoring and alerting, and auto-scaling infrastructure to handle traffic spikes</td></tr>
+      <tr><td>Accessibility non-compliance against WCAG 2.1 AA</td><td>Regular accessibility testing and incorporation of user feedback</td></tr>
+      <tr><td>Compliance gaps for GDPR, CCPA, or enterprise audit requirements</td><td>Compliance review of user data handling and audit trail validation in every test cycle</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="approvals">14. Approvals</h2>
+  <p>Team will send different types of documents for client approval like below:</p>
+  <ul>
+    <li>Test Plan</li>
+    <li>Test Scenarios</li>
+    <li>Test Cases</li>
+    <li>Reports</li>
+  </ul>
+  <p>Testing will only continue to the next steps once these approvals are done.</p>
+
+  <table class="signoff">
+    <thead>
+      <tr><th>Role</th><th>Name</th><th>Signature</th><th>Date</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Test Lead</td><td></td><td></td><td></td></tr>
+      <tr><td>QA Manager</td><td></td><td></td><td></td></tr>
+      <tr><td>Development Lead</td><td></td><td></td><td></td></tr>
+      <tr><td>Product Owner</td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <footer class="doc-foot">
+    Test Plan: VWO Login Dashboard | Version 1.0 | Prepared by QA Team | Source: PRD for VWO Login Dashboard (app.vwo.com)
+  </footer>
+
+</div>
+</body>
+</html>
