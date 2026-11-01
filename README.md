@@ -308,3 +308,5 @@ Every `config.properties` key (`base.url`, `browser`, `headless`, `explicit.wait
 |:-----|:-----|
 | 2026-10-25 | [Jira ticket to review-ready test plan PDF](learnings/2026-10-25-jira-ticket-to-test-plan-pdf.md) |
 | 2026-11-01 | [Salesforce login Selenium framework from a RICE-POT prompt](learnings/2026-11-01-salesforce-login-selenium-from-rice-pot.md) |
+=======
+# AIProjects
